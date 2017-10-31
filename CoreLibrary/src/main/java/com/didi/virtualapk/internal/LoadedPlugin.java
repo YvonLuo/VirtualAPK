@@ -402,7 +402,7 @@ public final class LoadedPlugin {
         ContentResolver resolver = this.mPluginContext.getContentResolver();
 
         for (PackageParser.Activity activity : this.mPackage.activities) {
-            if (match(activity, component)) {
+            if (activity.getComponentName().equals(component)) {
                 ResolveInfo resolveInfo = new ResolveInfo();
                 resolveInfo.activityInfo = activity.info;
                 resolveInfos.add(resolveInfo);
@@ -438,7 +438,7 @@ public final class LoadedPlugin {
         ContentResolver resolver = this.mPluginContext.getContentResolver();
 
         for (PackageParser.Service service : this.mPackage.services) {
-            if (match(service, component)) {
+            if (service.getComponentName().equals(component)) {
                 ResolveInfo resolveInfo = new ResolveInfo();
                 resolveInfo.serviceInfo = service.info;
                 resolveInfos.add(resolveInfo);
@@ -486,18 +486,6 @@ public final class LoadedPlugin {
 
     public ProviderInfo resolveContentProvider(String name, int flags) {
         return this.mProviders.get(name);
-    }
-
-    private boolean match(PackageParser.Component component, ComponentName target) {
-        ComponentName source = component.getComponentName();
-        if (source == target) return true;
-        if (source != null && target != null
-                && source.getClassName().equals(target.getClassName())
-                && (source.getPackageName().equals(target.getPackageName())
-                || mHostContext.getPackageName().equals(target.getPackageName()))) {
-            return true;
-        }
-        return false;
     }
 
     /**

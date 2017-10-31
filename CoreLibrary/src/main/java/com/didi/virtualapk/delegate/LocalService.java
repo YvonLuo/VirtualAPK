@@ -84,7 +84,9 @@ public class LocalService extends Service {
         ComponentName component = target.getComponent();
         LoadedPlugin plugin = mPluginManager.getLoadedPlugin(component);
         // ClassNotFoundException when unmarshalling in Android 5.1
-        target.setExtrasClassLoader(plugin.getClassLoader());
+        if (plugin != null) {
+            target.setExtrasClassLoader(plugin.getClassLoader());
+        }
         switch (command) {
             case EXTRA_COMMAND_START_SERVICE: {
                 ActivityThread mainThread = (ActivityThread)ReflectUtil.getActivityThread(getBaseContext());

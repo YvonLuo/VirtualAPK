@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
     defaultConfig {
@@ -31,11 +31,8 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.2.0'
-
+    compile 'com.android.support:support-v4:21.0.3'
     provided project(':AndroidStub')
-
-    testCompile 'junit:junit:4.12'
 }
 
 apply from: 'upload.gradle'
