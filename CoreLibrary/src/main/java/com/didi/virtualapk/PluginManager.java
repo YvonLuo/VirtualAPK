@@ -357,4 +357,15 @@ public class PluginManager {
         return resolveInfos;
     }
 
+    public Class<?> loadPluginClass(String packageName, String className){
+        Class<?> clazz=null;
+        try {
+            clazz=Class.forName(className,true,mPlugins.get(packageName).getClassLoader());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return clazz;
+    }
+
 }
